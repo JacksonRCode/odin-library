@@ -162,15 +162,72 @@ button:active {
   padding: 48px 64px;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, 100px);
+  grid-template-columns: repeat(auto-fit, 200px);
 }
 
 .bookCard {
-  height: 150px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  height: 200px;
+  display: grid;
+  
   padding: 8px 16px;
 
   border: 1px solid lightgrey;
 }
+
+.bookForm {
+  opacity: 0;
+  z-index: -1;
+
+  width: 450px;
+  height: 500px;
+
+  position: fixed;
+  top: calc(50% - 300px);
+  left: calc(50% - 200px);
+
+  padding: 16px 32px;
+
+  border: 1px solid black;
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bookForm.open {
+  opacity: 1;
+  z-index: 999;
+}
+
+.formHeader {
+  align-self: start;
+  padding-bottom: 16px;
+}
+
+.formInputs {
+  flex: 1;
+}
+
+.formInputs > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.formInputs > div:not(:last-child) {
+  padding-bottom: 12px;
+}
+
+.formFooter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.invisible {
+  color: white;
+}
+
+
+
+
+

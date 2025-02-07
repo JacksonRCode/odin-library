@@ -40,6 +40,34 @@
     <h1>Library</h1>
   </div>
   <div class="library">
+    <div class="bookForm">
+      <div class="formHeader">
+        <h2>Add a book to your library!</h2>
+      </div>
+      <div class="formInputs">
+        <div class="titleInput">
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title">
+        </div>
+        <div class="authorInput">
+          <label for="author">Author</label>
+          <input type="text" name="author" id="author">
+        </div>
+        <div class="pageCountInput">
+          <label for="pageCount">Page Count</label>
+          <input type="text" name="pageCount" id="pageCount">
+        </div>
+        <div class="releaseDateInput">
+          <label for="releaseDate">Release Date</label>
+          <input type="date" name="releaseDate" id="releaseDate">
+        </div>
+      </div>
+      <div class="formFooter">
+        <button class="exitAddBook invisible" disabled>fake</button>
+        <button class="submitBook" type="submit">Add Book</button>
+        <button class="exitAddBook">exit</button>
+      </div>
+    </div>
   </div>
 
   <script src="main.js"></script>

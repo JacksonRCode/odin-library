@@ -1,7 +1,4 @@
 
-// const bookList = [];
-// const bookList = [1,2,3,4,5,6];
-
 function Book(title, author, pageCount, releaseDate, dateAdded) {
   this.title = title;
   this.author = author;
@@ -10,28 +7,32 @@ function Book(title, author, pageCount, releaseDate, dateAdded) {
   this.addDate = dateAdded;
 }
 
-let book1 = new Book('Yay', 'Yay', '22', 'Feb3rd')
-const bookList = [book1];
-
-
-function createBook() {
-  // Ask for details about the book
-
-  return 1;
-}
-
 function addToBookList(bookList) {
-  let book = createBook();
+  const bookForm = document.querySelector('.submitBook');
 
+  let book = new Book();
+
+  bookForm.addEventListener("click", () => {
+    // Make form visible
+    bookForm.classList.add('open');
+
+    // Collect inputs
+    book.title = document.getElementById('#title').value;
+    book.author = document.getElementById('#author').value;
+    book.pageCount = document.getElementById('#pageCount').value;
+    book.releaseDate = document.getElementById('#releaseDate').value;
+  });
 
   if (bookList.push(book)) {
   alert("Successfully added book to book list");
   } else {
     alert("Failed to add book to library");
   } 
+
+  bookForm.classList.remove('open');
 }
 
-function removeBook(book) {
+function removeBook() {
   offset = 0;
   let l = bookList.length;
 
@@ -73,19 +74,19 @@ function displayBooks(bookList) {
 
     // Author
     const pAuthor = document.createElement('p');
-    pAuthor.textContent = book.author;
+    pAuthor.textContent = 'Author: ' + book.author;
 
     // Pagecount
     const pPageCount = document.createElement('p');
-    pPageCount.textContent = book.pageCount; 
+    pPageCount.textContent = 'Num Pages: ' + book.pageCount; 
 
     // Release Date
     const pReleaseDate = document.createElement('p');
-    pReleaseDate.textContent = book.releaseDate;
+    pReleaseDate.textContent = 'Released: ' + book.releaseDate;
 
     // Date Added
     const pDateAdded = document.createElement('p');
-    pDateAdded.textContent = book.dateAdded;
+    pDateAdded.textContent = 'Date added: ' + book.dateAdded;
 
     // Add children to newDiv
     newDiv.appendChild(h2Title);
@@ -99,4 +100,8 @@ function displayBooks(bookList) {
   }
 }
 
+const bookList = [];
+
 displayBooks(bookList);
+addToBookList(bookList);
+removeBook()
