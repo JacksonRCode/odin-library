@@ -1,50 +1,79 @@
 
+/*
+TODO
+1. Finish and test add to book list.
+1.1. Add addition date to the addToBookList function
+2. Query selector for removing from book list.
+2.1. Need icons on book cards for removing them.
+
+*/
+
 function Book(title, author, pageCount, releaseDate, dateAdded) {
   this.title = title;
   this.author = author;
   this.pageCount = pageCount;
   this.releaseDate = releaseDate;
-  this.addDate = dateAdded;
+  this.dateAdded = dateAdded;
 }
 
 function addToBookList(bookList) {
-  const bookForm = document.querySelector('.submitBook');
-
-  let book = new Book();
-
-  bookForm.addEventListener("click", () => {
-    // Make form visible
+  // Get add book button
+  const addBook = document.querySelector('#addBook');
+  // Get form element
+  const bookForm = document.querySelector('.bookForm');
+  // Get submit form button
+  const confirmBook = document.querySelector('.submitBook');
+  // Get close form button
+  const exitForm = document.querySelector('#exitForm');
+  
+  addBook.addEventListener("click", () => {
+    /*
+      Make the book input form visible
+    */
     bookForm.classList.add('open');
-
-    // Collect inputs
-    book.title = document.getElementById('#title').value;
-    book.author = document.getElementById('#author').value;
-    book.pageCount = document.getElementById('#pageCount').value;
-    book.releaseDate = document.getElementById('#releaseDate').value;
   });
 
-  if (bookList.push(book)) {
-  alert("Successfully added book to book list");
-  } else {
-    alert("Failed to add book to library");
-  } 
+  exitForm.addEventListener('click', () => {
+    /* 
+      Close the form without creating a new book
+    */
+    closeForm(bookForm);
+  });
 
-  bookForm.classList.remove('open');
+  confirmBook.addEventListener("click", () => {
+    /*
+      Create new book and add it to the library 
+    */
+
+    let book = new Book();
+
+    // Collect inputs
+    book.title = document.getElementById('title').value;
+    book.author = document.getElementById('author').value;
+    book.pageCount = document.getElementById('pageCount').value;
+    book.releaseDate = document.getElementById('releaseDate').value;
+    const d = new Date();
+    let mdy = (d.getUTCMonth() + 1) + '/' + d.getUTCDay() + '/' + d.getUTCFullYear()
+    book.dateAdded = mdy;
+
+    if (!bookList.push(book)) {
+      alert("Failed to add book to library");
+    } 
+
+    closeForm(bookForm);
+    displayBooks(bookList);
+  });
 }
 
-function removeBook() {
-  offset = 0;
-  let l = bookList.length;
+function closeForm(form) {
+  form.classList.remove('open');
+    
+  // remove user input from input fields
+  const inputArray = document.querySelectorAll('.formInput');
+  let l = inputArray.length;
 
-  for (let i = 1; i < l; i++) {
-    if (bookList[i-1] === book) {
-      offset = 1;
-    }
-    bookList[i - 1] = bookList[i - 1 + offset];
-  }
-
-  if (offset || bookList[l-1] === book) {
-    bookList[l-1] = null;
+  for (let i = 0; i < l; i++) {
+    inputArray[i].value = '';
   }
 }
 
@@ -52,14 +81,20 @@ function displayBooks(bookList) {
   // Get library from html
   const libraryDiv = document.querySelector('.library');
 
+  const cards = document.querySelectorAll('.bookCard');
+
+  let cl = cards.length;
+
+  for (let i = 0; i < cl; i++) {
+    // Remove cards from html so that there aren't duplicates
+    libraryDiv.removeChild(cards[i]);
+  }
+
+
   let l = bookList.length;
   for (let i = 0; i < l; i++) {
-    /* Steps:
-      1. Create new div and give it a class of .bookCard
-      2. Create h2 element for the book title
-      3. Create p element for the rest of the book elements
-      4. Add each of these elements to the newDiv as children
-      5. Add newDiv to library as child
+    /* 
+      Add books in booklist to the display
     */
     let book = bookList[i];
 
@@ -88,20 +123,64 @@ function displayBooks(bookList) {
     const pDateAdded = document.createElement('p');
     pDateAdded.textContent = 'Date added: ' + book.dateAdded;
 
+    // Create div for read and delete buttons
+    const cardButtons = document.createElement('div');
+
+    // Read btn
+    const readBtn = document.createElement('button');
+    readBtn.textContent = 'read';
+    readBtn.addEventListener('click', () => {
+      if (!newDiv.classList.contains('read')) {
+        newDiv.classList.add('read');
+      } else {
+        newDiv.classList.remove('read');
+      }
+    });
+    cardButtons.appendChild(readBtn);
+
+    // Del btn
+    const dltBtn = document.createElement('button');
+    dltBtn.textContent = 'delete';
+    dltBtn.addEventListener('click', () => {
+      const library = document.querySelector('.library');
+      library.removeChild(newDiv);
+      removeBook(book);
+    });
+
+    cardButtons.appendChild(dltBtn);
+
     // Add children to newDiv
     newDiv.appendChild(h2Title);
     newDiv.appendChild(pAuthor);
     newDiv.appendChild(pPageCount);
     newDiv.appendChild(pReleaseDate);
     newDiv.appendChild(pDateAdded);
+    newDiv.appendChild(cardButtons);
     
     // Add newDiv to library
     libraryDiv.appendChild(newDiv);
   }
 }
 
+function removeBook(book) {
+  offset = 0;
+  let l = bookList.length;
+
+  for (let i = 1; i < l; i++) {
+    if (bookList[i-1] === book) {
+      offset = 1;
+    }
+    bookList[i - 1] = bookList[i - 1 + offset];
+  }
+
+  if (offset || bookList[l-1] === book) {
+    bookList[l-1] = null;
+  }
+  bookList.pop();
+}
+
 const bookList = [];
 
 displayBooks(bookList);
 addToBookList(bookList);
-removeBook()
+

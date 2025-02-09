@@ -60,6 +60,10 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+body.minimize {
+  grid-template-columns: 50px 1fr;
+}
+
 img {
   /* one more cheeky base */
   height: 24px;
@@ -163,15 +167,24 @@ button:active {
 
   display: grid;
   grid-template-columns: repeat(auto-fit, 200px);
+  gap: 16px 16px;
 }
 
 .bookCard {
-  height: 200px;
+  height: 250px;
   display: grid;
   
   padding: 8px 16px;
 
   border: 1px solid lightgrey;
+}
+
+.bookCard > h2 {
+  font-size: 1rem;
+}
+
+.bookCard.read {
+  background-color: lightgrey;
 }
 
 .bookForm {
@@ -223,10 +236,23 @@ button:active {
   justify-content: space-between;
 }
 
-.invisible {
-  color: white;
+.submitBook {
+  border: 1px solid grey;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: lightgrey;
 }
 
+.exitAddBook {
+  border: 1px solid red;
+  padding: 4px 16px;
+  border-radius: 20px;
+  background-color: red;
+}
+
+.invisible {
+  opacity: 0;
+}
 
 
 
