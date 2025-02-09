@@ -254,6 +254,22 @@ button:active {
   opacity: 0;
 }
 
+.cardButtons {
+  display: flex;
+  justify-content: space-between;
+}
 
+.readBook {
+  /* border: 1px solid grey; */
+  border-radius: 20px;
+  padding: 0px 16px;
+  background-color: lightgrey;
+  border: 1px solid grey;
+}
 
+.deleteBook {
+  background-color: red;
+  border-radius: 20px;
+  border: 1px solid red;
+}
 

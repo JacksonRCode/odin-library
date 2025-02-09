@@ -125,9 +125,11 @@ function displayBooks(bookList) {
 
     // Create div for read and delete buttons
     const cardButtons = document.createElement('div');
+    cardButtons.classList.add('cardButtons');
 
     // Read btn
     const readBtn = document.createElement('button');
+    readBtn.classList.add('readBook');
     readBtn.textContent = 'read';
     readBtn.addEventListener('click', () => {
       if (!newDiv.classList.contains('read')) {
@@ -140,6 +142,7 @@ function displayBooks(bookList) {
 
     // Del btn
     const dltBtn = document.createElement('button');
+    dltBtn.classList.add('deleteBook');
     dltBtn.textContent = 'delete';
     dltBtn.addEventListener('click', () => {
       const library = document.querySelector('.library');
