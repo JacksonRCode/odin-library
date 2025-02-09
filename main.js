@@ -51,10 +51,10 @@ function addToBookList(bookList) {
     book.title = document.getElementById('title').value;
     book.author = document.getElementById('author').value;
     book.pageCount = document.getElementById('pageCount').value;
-    book.releaseDate = document.getElementById('releaseDate').value;
-    const d = new Date();
-    let mdy = (d.getUTCMonth() + 1) + '/' + d.getUTCDay() + '/' + d.getUTCFullYear()
-    book.dateAdded = mdy;
+    // book.releaseDate = document.getElementById('releaseDate').value;
+    // const d = new Date();
+    // let mdy = (d.getUTCMonth() + 1) + '/' + d.getUTCDay() + '/' + d.getUTCFullYear()
+    // book.dateAdded = mdy;
 
     if (!bookList.push(book)) {
       alert("Failed to add book to library");
@@ -113,15 +113,15 @@ function displayBooks(bookList) {
 
     // Pagecount
     const pPageCount = document.createElement('p');
-    pPageCount.textContent = 'Num Pages: ' + book.pageCount; 
+    pPageCount.textContent = 'Pages: ' + book.pageCount; 
 
     // Release Date
-    const pReleaseDate = document.createElement('p');
-    pReleaseDate.textContent = 'Released: ' + book.releaseDate;
+    // const pReleaseDate = document.createElement('p');
+    // pReleaseDate.textContent = 'Released: ' + book.releaseDate;
 
-    // Date Added
-    const pDateAdded = document.createElement('p');
-    pDateAdded.textContent = 'Date added: ' + book.dateAdded;
+    // // Date Added
+    // const pDateAdded = document.createElement('p');
+    // pDateAdded.textContent = 'Date added: ' + book.dateAdded;
 
     // Create div for read and delete buttons
     const cardButtons = document.createElement('div');
@@ -156,8 +156,8 @@ function displayBooks(bookList) {
     newDiv.appendChild(h2Title);
     newDiv.appendChild(pAuthor);
     newDiv.appendChild(pPageCount);
-    newDiv.appendChild(pReleaseDate);
-    newDiv.appendChild(pDateAdded);
+    // newDiv.appendChild(pReleaseDate);
+    // newDiv.appendChild(pDateAdded);
     newDiv.appendChild(cardButtons);
     
     // Add newDiv to library

@@ -95,7 +95,8 @@ button:active {
   grid-template-rows: 75px 1fr;
 
   background-color: bisque;
-  padding: 0px 16px
+  padding: 0px 16px;
+  z-index: 3;
 }
 
 .navigation-buttons {
@@ -157,16 +158,18 @@ button:active {
   align-items: center;
 
   background-color: white;
-  border-bottom: solid 3px lightgrey;
+  /* border-bottom: solid 3px whitesmoke; */
+  box-shadow: 0px 0px 6px 1px lightgrey;
+  z-index: 2;
 }
 
 .library {
   grid-area: 2 / 2 / 3 / 3;
-  background-color: white;
+  background-color: whitesmoke;
   padding: 48px 64px;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, 200px);
+  grid-template-columns: repeat(auto-fit, 300px);
   gap: 16px 16px;
 }
 
@@ -174,9 +177,12 @@ button:active {
   height: 250px;
   display: grid;
   
-  padding: 8px 16px;
+  padding: 16px 16px;
 
-  border: 1px solid lightgrey;
+  background-color: white;
+  box-shadow: 0px 1px 5px lightgrey;
+  border-radius: 16px;
+  font-weight: bold;
 }
 
 .bookCard > h2 {
@@ -184,7 +190,7 @@ button:active {
 }
 
 .bookCard.read {
-  background-color: lightgrey;
+  background-color: lightgreen;
 }
 
 .bookForm {
@@ -256,20 +262,23 @@ button:active {
 
 .cardButtons {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .readBook {
   /* border: 1px solid grey; */
   border-radius: 20px;
-  padding: 0px 16px;
+  /* padding: 0px 16px; */
   background-color: lightgrey;
   border: 1px solid grey;
+  
 }
 
 .deleteBook {
   background-color: red;
   border-radius: 20px;
   border: 1px solid red;
+  margin-top: 8px;
 }
 
