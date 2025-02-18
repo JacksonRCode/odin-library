@@ -1,192 +1,13 @@
 
-
-
-// function Book(title, author, pageCount, releaseDate, dateAdded) {
-//   this.title = title;
-//   this.author = author;
-//   this.pageCount = pageCount;
-//   this.releaseDate = releaseDate;
-//   this.dateAdded = dateAdded;
-// }
-
-// function addToBookList(bookList) {
-//   // Get add book button
-//   const addBook = document.querySelector('#addBook');
-//   // Get form element
-//   const bookForm = document.querySelector('.bookForm');
-//   // Get submit form button
-//   const confirmBook = document.querySelector('.submitBook');
-//   // Get close form button
-//   const exitForm = document.querySelector('#exitForm');
-  
-//   addBook.addEventListener("click", () => {
-//     /*
-//       Make the book input form visible
-//     */
-//     bookForm.classList.add('open');
-//   });
-
-//   exitForm.addEventListener('click', () => {
-//     /* 
-//       Close the form without creating a new book
-//     */
-//     closeForm(bookForm);
-//   });
-
-//   confirmBook.addEventListener("click", () => {
-//     /*
-//       Create new book and add it to the library 
-//     */
-
-//     let book = new Book();
-
-//     // Collect inputs
-//     book.title = document.getElementById('title').value;
-//     book.author = document.getElementById('author').value;
-//     book.pageCount = document.getElementById('pageCount').value;
-//     // book.releaseDate = document.getElementById('releaseDate').value;
-//     // const d = new Date();
-//     // let mdy = (d.getUTCMonth() + 1) + '/' + d.getUTCDay() + '/' + d.getUTCFullYear()
-//     // book.dateAdded = mdy;
-
-//     if (!bookList.push(book)) {
-//       alert("Failed to add book to library");
-//     } 
-
-//     closeForm(bookForm);
-//     displayBooks(bookList);
-//   });
-// }
-
-// function closeForm(form) {
-//   form.classList.remove('open');
-    
-//   // remove user input from input fields
-//   const inputArray = document.querySelectorAll('.formInput');
-//   let l = inputArray.length;
-
-//   for (let i = 0; i < l; i++) {
-//     inputArray[i].value = '';
-//   }
-// }
-
-// function displayBooks(bookList) {
-//   // Get library from html
-//   const libraryDiv = document.querySelector('.library');
-
-//   const cards = document.querySelectorAll('.bookCard');
-
-//   let cl = cards.length;
-
-//   for (let i = 0; i < cl; i++) {
-//     // Remove cards from html so that there aren't duplicates
-//     libraryDiv.removeChild(cards[i]);
-//   }
-
-
-//   let l = bookList.length;
-//   for (let i = 0; i < l; i++) {
-//     /* 
-//       Add books in booklist to the display
-//     */
-//     let book = bookList[i];
-
-//     // Create div and give it class
-//     const newDiv = document.createElement('div');
-//     newDiv.classList.add('bookCard');
-
-//     // Title
-//     const h2Title = document.createElement('h2');
-//     h2Title.classList.add('cardTitle');
-//     h2Title.textContent = book.title;
-
-//     // Author
-//     const pAuthor = document.createElement('p');
-//     pAuthor.textContent = 'Author: ' + book.author;
-
-//     // Pagecount
-//     const pPageCount = document.createElement('p');
-//     pPageCount.textContent = 'Pages: ' + book.pageCount; 
-
-//     // Release Date
-//     // const pReleaseDate = document.createElement('p');
-//     // pReleaseDate.textContent = 'Released: ' + book.releaseDate;
-
-//     // // Date Added
-//     // const pDateAdded = document.createElement('p');
-//     // pDateAdded.textContent = 'Date added: ' + book.dateAdded;
-
-//     // Create div for read and delete buttons
-//     const cardButtons = document.createElement('div');
-//     cardButtons.classList.add('cardButtons');
-
-//     // Read btn
-//     const readBtn = document.createElement('button');
-//     readBtn.classList.add('readBook');
-//     readBtn.textContent = 'read';
-//     readBtn.addEventListener('click', () => {
-//       if (!newDiv.classList.contains('read')) {
-//         newDiv.classList.add('read');
-//       } else {
-//         newDiv.classList.remove('read');
-//       }
-//     });
-//     cardButtons.appendChild(readBtn);
-
-//     // Del btn
-//     const dltBtn = document.createElement('button');
-//     dltBtn.classList.add('deleteBook');
-//     dltBtn.textContent = 'delete';
-//     dltBtn.addEventListener('click', () => {
-//       const library = document.querySelector('.library');
-//       library.removeChild(newDiv);
-//       removeBook(book);
-//     });
-
-//     cardButtons.appendChild(dltBtn);
-
-//     // Add children to newDiv
-//     newDiv.appendChild(h2Title);
-//     newDiv.appendChild(pAuthor);
-//     newDiv.appendChild(pPageCount);
-//     // newDiv.appendChild(pReleaseDate);
-//     // newDiv.appendChild(pDateAdded);
-//     newDiv.appendChild(cardButtons);
-    
-//     // Add newDiv to library
-//     libraryDiv.appendChild(newDiv);
-//   }
-// }
-
-// function removeBook(book) {
-//   offset = 0;
-//   let l = bookList.length;
-
-//   for (let i = 1; i < l; i++) {
-//     if (bookList[i-1] === book) {
-//       offset = 1;
-//     }
-//     bookList[i - 1] = bookList[i - 1 + offset];
-//   }
-
-//   if (offset || bookList[l-1] === book) {
-//     bookList[l-1] = null;
-//   }
-//   bookList.pop();
-// }
-
-// const bookList = [];
-
-// displayBooks(bookList);
-// addToBookList(bookList);
-
 class Book {
+  #read;
+  #favourite;
   constructor(title, author, pageCount) {
     this.title = title;
     this.author = author;
     this.pageCount = pageCount;
-    this.read = 0;
-    this.favourite = 0;
+    this.#read = 0;
+    this.#favourite = 0;
   }
 
   get info() {
@@ -194,18 +15,18 @@ class Book {
   }
 
   get getRead() {
-    return this.read === 1 ? "Read" : "Not read";
+    return this.#read === 1 ? "Read" : "Not read";
   }
 
   get getFavourite() {
-    return this.favourite === 1 ? "Favourite" : "Not favourite";
+    return this.#favourite === 1 ? "Favourite" : "Not favourite";
   }
 
   set setRead(bool) {
     if (bool !== null) {
-      this.read = bool;
+      this.#read = bool;
     } else {
-      this.read = this.read === 0 ? 1 : 0;
+      this.#read = this.#read === 0 ? 1 : 0;
     }
   }
 
@@ -219,37 +40,39 @@ class Book {
 }
 
 class User {
+  #name;
+  #bookList;
   constructor(name) {
-    this.name = name;
-    this.bookList = [];
+    this.#name = name;
+    this.#bookList = [];
   }
 
   get getName() {
-    return this.name;
+    return this.#name;
   }
 
   get getBooks() {
-    return this.bookList;
+    return this.#bookList;
   }
 
   set addBook(book) {
-    this.bookList.push(book);
+    this.#bookList.push(book);
   }
 
   removeBook(book) {
-    const l = this.bookList.length
+    const l = this.#bookList.length
     let offset = 0;
 
     for (let i = 0; i < l; i++) {
-      if (this.bookList[i] === book) {
+      if (this.#bookList[i] === book) {
         offset = 1;
       }
       if (offset) {
-        this.bookList[i] = this.bookList[i+offset];
+        this.#bookList[i] = this.#bookList[i+offset];
       }
     }
     if (offset) {
-      this.bookList.pop();
+      this.#bookList.pop();
     }
   }
 }
@@ -266,7 +89,7 @@ class Library {
     this.books = this.user.getBooks;
   }
 
-  formatBook(book) {
+  #formatBook(book) {
     /*
       Creates book card ready to insert into html library
 
@@ -310,8 +133,7 @@ class Library {
     });
     // deleteBtn.addEventListener('click', this.deleteEvent(newCard, book));
     deleteBtn.addEventListener('click', () => {
-      const lib = document.querySelector('.library');
-      lib.removeChild(newCard);
+      this.htmlLibrary.removeChild(newCard);
       this.removeBook(book); 
     });
 
@@ -328,7 +150,7 @@ class Library {
     this.fBooks.push(newCard);
   }
 
-  injectLibrary() {
+  #injectLibrary() {
     /*
       Sequentially injects each formatted book into the library
     */
@@ -359,7 +181,7 @@ class Library {
     this.user.addBook = book;
     this.books.push(book);
 
-    this.formatBook(book);
+    this.#formatBook(book);
     const l = this.fBooks.length;
     this.htmlLibrary.appendChild(this.fBooks[l-1]);
   }
@@ -388,7 +210,7 @@ class Library {
     }
 
     this.emptyLibrary();
-    this.injectLibrary();
+    this.#injectLibrary();
   }
 }
 
@@ -464,21 +286,4 @@ class Library {
   formListeners();
       
 })();
-
-// let a = new Book('a', 'me', 333);
-
-// console.log(a.getRead);
-// a.setRead = 0;
-// console.log(a.getRead);
-// a.setFavourite = 0;
-// console.log(a.getFavourite);
-
-// let b = new Book('b', 'me', 332);
-
-// let jackson = new User('Jackson');
-// jackson.addBook = a;
-// jackson.addBook = b;
-// console.log("Books " + jackson.bookList[0]);
-
-// let lib = new Library(jackson);
 
